@@ -13,7 +13,7 @@ TYPE: INT| FLOAT | SHORT | STRING | VOID ;
 
 fragment NEW_DIGIT: [0-9];
 
-PHRASE: ('a' .. 'z'  | 'A' .. 'Z'  | NEW_DIGIT  | '_'  | '-') +;
+PHRASE: ([a-zA-Z_] | NEW_DIGIT  | '_'  | '-') +;
 argument:TYPE PHRASE | TYPE PHRASE','argument;
 parenthesis: '{'body'}' | '{' '}' | '{ }';
 
@@ -29,7 +29,7 @@ FLOAT:'float';
 SHORT:'short';
 STRING:'String';
 VOID:'void';
-arrays : ('int' | 'float' | 'short' | 'String' | 'void')(OBR CBR)?;
+arrays : (INT | FLOAT | SHORT | STRING | VOID)(OBR CBR)?;
 
 //expr
 // : NAME
