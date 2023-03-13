@@ -1,19 +1,26 @@
 grammar g;
-methodDeclaration:modificators* TYPE NAME '('argument*')' parenthesis*
+methodDeclaration:
+modificators? TYPE PHRASE '('argument*')' parenthesis?;
+TYPE: (INT | FLOAT | SHORT |STRING | VOID)(' '*)?;
 
-;
+PHRASE: 'a' .. 'z' + | 'A' .. 'Z' + ;
 
-TYPE: 'int ' | 'float ' | 'short' | 'String ' | 'void ';
-NAME: 'a' .. 'z' + | 'A' .. 'Z' + ;
-argument:TYPE NAME | TYPE NAME','+;
+argument:TYPE PHRASE | TYPE PHRASE COMMA +;
 modificators : ('public '|'protected '|'private ');
 parenthesis: '{'body'}' | '{' '}' | '{ }';
+COMMA:' '*','' '*;
+body: TYPE PHRASE;
+classBody:methodDeclaration EOF;
+arrays : TYPE (OBR CBR)?;
+
 OBR: '[';
 CBR: ']';
+INT:'int';
+FLOAT:'float';
+SHORT:'short';
+STRING:'String';
+VOID:'void';
 
-body: TYPE NAME;
-
-arrays : ('int' | 'float' | 'short' | 'String' | 'void')(OBR CBR)?;
 
 //expr
 // : NAME
