@@ -1,17 +1,23 @@
 grammar g;
-methodDeclaration: TYPE NAME '('TYPE NAME')' parenthesis;
+methodDeclaration:modificators* TYPE NAME '('argument*')' parenthesis*
+
+;
 
 TYPE: 'int ' | 'float ' | 'short' | 'String ' | 'void ';
-NAME : 'a' .. 'z' + | 'A' .. 'Z' + ;
-
+NAME: 'a' .. 'z' + | 'A' .. 'Z' + ;
+argument:TYPE NAME | TYPE NAME','+;
+modificators : ('public '|'protected '|'private ');
 parenthesis: '{'body'}' | '{' '}' | '{ }';
+OBR: '[';
+CBR: ']';
 
 body: TYPE NAME;
 
+arrays : ('int' | 'float' | 'short' | 'String' | 'void')(OBR CBR)?;
 
 //expr
 // : NAME
-//// | expr AND expr
+//// | expr AND expra
 //// | expr OR expr
 // ;
 
