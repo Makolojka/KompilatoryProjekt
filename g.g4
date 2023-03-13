@@ -1,28 +1,34 @@
 grammar g;
-classDeclaration: modificators? 'class' NAME '{' classBody* '}';
+WS : [ \t\r\n]+ -> skip ;
+classDeclaration: MODIFICATORS? 'class' PHRASE '{' classBody* '}';
 
-classBody: methodDeclaration+ | variable+;
+//classBody: methodDeclaration+ | variable+;
+classBody: (methodDeclaration | variable)+;
+variable: MODIFICATORS? TYPE PHRASE';' | MODIFICATORS? TYPE PHRASE '=' '"'*  PHRASE+ '"'* ';';
 
-variable: modificators? TYPE NAME ';' | modificators? TYPE NAME '=' '"'*  NAME+ '"'* ';';
+methodDeclaration: MODIFICATORS? argument '('argument*')' parenthesis*;
 
-methodDeclaration: modificators? argument '('argument*')' parenthesis*;
-
-modificators : ('public '|'protected '|'private ');
-TYPE: 'int ' | 'float ' | 'short ' | 'string ' | 'void ';
+MODIFICATORS : PUBLIC | PROTECTED | PRIVATE;
+TYPE: INT| FLOAT | SHORT | STRING | VOID ;
 
 fragment NEW_DIGIT: [0-9];
 
-NAME: 'a' .. 'z' + | 'A' .. 'Z' + | NEW_DIGIT + | '_' + | '-' +;
-argument:TYPE NAME | TYPE NAME', 'argument;
+PHRASE: 'a' .. 'z' + | 'A' .. 'Z' + | NEW_DIGIT + | '_' + | '-' +;
+argument:TYPE PHRASE | TYPE PHRASE','argument;
 parenthesis: '{'body'}' | '{' '}' | '{ }';
 
-WS : [ \t\r\n]+ -> skip ;
+
 body: variable+;
-
-
+PUBLIC:'public';
+PROTECTED:'protected';
+PRIVATE:'private';
 OBR: '[';
 CBR: ']';
-
+INT:'int';
+FLOAT:'float';
+SHORT:'short';
+STRING:'String';
+VOID:'void';
 arrays : ('int' | 'float' | 'short' | 'String' | 'void')(OBR CBR)?;
 
 //expr
