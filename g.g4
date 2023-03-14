@@ -63,3 +63,60 @@ arrays : (INT | FLOAT | SHORT | STRING | VOID)(OBR CBR)?;
 //      (THROWS qualifiedNameList)?
 //      methodBody
 //    ;
+
+
+//petla loop dla javy
+
+//forStatement
+//    : 'for' '(' forControl ')' statement
+//    ;
+//
+//forControl
+//    : forInit? ';' expression? ';' forUpdate?
+//    ;
+//
+//forInit
+//    : localVariableDeclaration
+//    | expressionList
+//    ;
+//
+//forUpdate
+//    : expressionList
+//    ;
+//
+//localVariableDeclaration
+//    : type variableDeclarator (',' variableDeclarator)*
+//    ;
+//
+//variableDeclarator
+//    : Identifier ('=' variableInitializer)?
+//    ;
+//
+//variableInitializer
+//    : arrayInitializer
+//    | expression
+//    ;
+//
+//expressionList
+//    : expression (',' expression)*
+//    ;
+
+//if
+
+//ifStatement
+//    : 'if' '(' expression ')' statement ( 'else' statement )?
+//    ;
+//
+//expression
+//    : //
+//    ;
+//
+//statement
+//    : //
+//    ;
+
+//komentarz
+
+COMMENT
+    : '//' ~[\r\n]* -> skip
+    ;
