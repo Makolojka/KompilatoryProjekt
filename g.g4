@@ -101,6 +101,22 @@ arrays : (INT | FLOAT | SHORT | STRING | VOID)(OBR CBR)?;
 //    : expression (',' expression)*
 //    ;
 
+
+// petla while
+
+//whileStatement
+//    : 'while' '(' expression ')' statement
+//    ;
+//
+//expression
+//    : // your expression rules go here
+//    ;
+//
+//statement
+//    : // your statement rules go here
+//    ;
+
+
 //if
 
 //ifStatement
@@ -114,6 +130,8 @@ arrays : (INT | FLOAT | SHORT | STRING | VOID)(OBR CBR)?;
 //statement
 //    : //
 //    ;
+
+
 
 //komentarz
 
