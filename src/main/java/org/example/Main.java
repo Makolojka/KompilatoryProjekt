@@ -1,6 +1,8 @@
 package org.example;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.IOException;
 
@@ -13,7 +15,11 @@ public class Main {
         GrammarParser grammarParser = new GrammarParser(commonTokenStream);
         grammarParser.addErrorListener(ThrowingErrorListener.INSTANCE);
 
-        grammarParser.seq();
+        ParseTree tree = grammarParser.seq(); // parse the content and get the tree
+        Mylistener listener = new Mylistener();
+
+        ParseTreeWalker walker = new ParseTreeWalker();
+        walker.walk(listener,tree);
 
 //        CharStream charStream = CharStreams.fromString("class test{" +
 //                "    int a;" +
