@@ -17,8 +17,8 @@ public class gLexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, MODIFICATORS=11, TYPE=12, PHRASE=13, WS=14, PUBLIC=15, PROTECTED=16, 
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9,
+		T__9=10, MODIFICATORS=11, TYPE=12, PHRASE=13, WS=14, PUBLIC=15, PROTECTED=16,
 		PRIVATE=17, OBR=18, CBR=19, INT=20, FLOAT=21, SHORT=22, STRING=23, VOID=24;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
@@ -30,9 +30,9 @@ public class gLexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8", 
-			"T__9", "MODIFICATORS", "TYPE", "NEW_DIGIT", "PHRASE", "WS", "PUBLIC", 
-			"PROTECTED", "PRIVATE", "OBR", "CBR", "INT", "FLOAT", "SHORT", "STRING", 
+			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8",
+			"T__9", "MODIFICATORS", "TYPE", "NEW_DIGIT", "PHRASE", "WS", "PUBLIC",
+			"PROTECTED", "PRIVATE", "OBR", "CBR", "INT", "FLOAT", "SHORT", "STRING",
 			"VOID"
 		};
 	}
@@ -40,16 +40,16 @@ public class gLexer extends Lexer {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'class'", "'{'", "'}'", "';'", "'='", "'\"'", "'('", "')'", "','", 
-			"'{ }'", null, null, null, null, "'public'", "'protected'", "'private'", 
+			null, "'class'", "'{'", "'}'", "';'", "'='", "'\"'", "'('", "')'", "','",
+			"'{ }'", null, null, null, null, "'public'", "'protected'", "'private'",
 			"'['", "']'", "'int'", "'float'", "'short'", "'String'", "'void'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, null, "MODIFICATORS", 
-			"TYPE", "PHRASE", "WS", "PUBLIC", "PROTECTED", "PRIVATE", "OBR", "CBR", 
+			null, null, null, null, null, null, null, null, null, null, null, "MODIFICATORS",
+			"TYPE", "PHRASE", "WS", "PUBLIC", "PROTECTED", "PRIVATE", "OBR", "CBR",
 			"INT", "FLOAT", "SHORT", "STRING", "VOID"
 		};
 	}
@@ -94,7 +94,7 @@ public class gLexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "g.g4"; }
+	public String getGrammarFileName() { return "Grammar.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

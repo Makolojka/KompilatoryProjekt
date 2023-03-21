@@ -7,7 +7,6 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException, ParseCancellationException {
 
-        //CharStream charStream = CharStreams.fromFileName("example.cc");
         CharStream charStream = CharStreams.fromString("class test{" +
                 "    int a;" +
                 "    int b;" +
