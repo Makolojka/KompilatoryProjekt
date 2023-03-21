@@ -7,9 +7,13 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException, ParseCancellationException {
 
+        CharStream charStream = CharStreams.fromString("seq(fun1(a,b),fun2())");
+        GrammarLexer grammarLexerLexer = new GrammarLexer(charStream);
+        CommonTokenStream commonTokenStream = new CommonTokenStream(grammarLexerLexer);
+        GrammarParser grammarParser = new GrammarParser(commonTokenStream);
+        grammarParser.addErrorListener(ThrowingErrorListener.INSTANCE);
 
-
-
+        grammarParser.seq();
 
 //        CharStream charStream = CharStreams.fromString("class test{" +
 //                "    int a;" +
