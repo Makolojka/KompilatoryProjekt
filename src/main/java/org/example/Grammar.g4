@@ -1,10 +1,10 @@
 grammar Grammar;
+WS : [ \t\r\n]+ -> skip ;
+seq : 'seq('fun','fun')';
+fun:PHRASE'('args*')';
 
-seq : (expression ',')* expression;
-expression
-  : INTEGER
-  | ID
-  ;
+args:PHRASE| ',' args;
 
-INTEGER : [0-9]+ ;
-ID      : [a-zA-Z]+ ;
+PHRASE : ([a-zA-Z_] | NEW_DIGIT|'_'|'-')+;
+fragment NEW_DIGIT:[0-9];
+
