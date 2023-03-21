@@ -42,14 +42,26 @@ class PseudoToJavaVisitor extends GrammarBaseVisitor<String> {
     public String visitFun(GrammarParser.FunContext ctx) {
         // translate a function in the grammar to Java
         String functionName = ctx.PHRASE().getText();
-        String args = visit(ctx.args(0));
-        if (ctx.args() != null) {
-            for(int i=0;i<ctx.getChildCount();i++ ){
-              // args=args + ctx.getChild(i).getText();
+//        String args = visit(ctx.args(0));
+        String args = "";
+        System.out.println(ctx.args(0).getText());
 
-            }
+//        args = ctx.args(0).getText();
+//        args = args + ctx.args(1).getText();
 
+        for (int i=0; i<= ctx.getChildCount(); i++)
+        {
+            args = args + ctx.args(i).getText();
         }
+
+//
+//        if (ctx.args() != null) {
+//            for(int i=0;i<ctx.getChildCount();i++ ){
+//              // args=args + ctx.getChild(i).getText();
+//                args = args + ctx.getChild(i).getText();
+//            }
+//
+//        }
         return "public void "+ functionName + "(" + args + ")";
     }
 
