@@ -3,10 +3,12 @@ package org.example;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+import java.util.Objects;
+
 public class Main {
     public static void main(String[] args) throws Exception {
         // create a CharStream from your pseudo code string
-        CharStream input = CharStreams.fromString("seq(fun1(sda,sds),fun2(sd,ds))");
+        CharStream input = CharStreams.fromString("seq(fun1(sda,sds, a , b),fun2(sd,ds, test,   asd))");
 
         // create a lexer that will tokenize the input
         GrammarLexer lexer = new GrammarLexer(input);
@@ -35,33 +37,30 @@ class PseudoToJavaVisitor extends GrammarBaseVisitor<String> {
     @Override
     public String visitSeq(GrammarParser.SeqContext ctx) {
         // translate the seq rule of the grammar to Java
-        return visit(ctx.fun(0)) + ";\n" + visit(ctx.fun(1)) + ";\n";
+        return visit(ctx.fun(0)) + "\n" + visit(ctx.fun(1)) + "\n";
     }
 
     @Override
     public String visitFun(GrammarParser.FunContext ctx) {
         // translate a function in the grammar to Java
         String functionName = ctx.PHRASE().getText();
-        String args = visit(ctx.args(0));
+        String args = "";
         if (ctx.args() != null) {
+
             for(int i=0;i<ctx.getChildCount();i++ ){
-              // args=args + ctx.getChild(i).getText();
-
+                for(int j = 0; j < ctx.getChild(i).getChildCount(); j++){
+                    if(!Objects.equals(ctx.getChild(i).getChild(j).getText(), ",")){
+                        args += "int " + ctx.getChild(i).getChild(j).getText();
+                    }
+                    else {
+                        args += ", ";
+                    }
+                }
             }
-
         }
-        return "public void "+ functionName + "(" + args + ")";
+        return "public void "+ functionName + "(" + args + "){\n}";
     }
 
-    @Override
-    public String visitArgs(GrammarParser.ArgsContext ctx) {
-        // translate function arguments in the grammar to Java
-        if (ctx.args() != null) {
-            return visit(ctx.args()) + ", " + visit(ctx.getChild(0));
-        } else {
-            return visit(ctx.getChild(0));
-        }
-    }
     private String translateOperator(String op) {
         // translate an operator in the pseudo language to Java
         switch (op) {
