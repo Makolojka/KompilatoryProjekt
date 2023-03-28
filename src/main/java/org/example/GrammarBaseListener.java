@@ -29,13 +29,13 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSeq2(GrammarParser.Seq2Context ctx) { }
+	@Override public void enterArg(GrammarParser.ArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSeq2(GrammarParser.Seq2Context ctx) { }
+	@Override public void exitArg(GrammarParser.ArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

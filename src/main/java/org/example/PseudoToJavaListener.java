@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.example.GrammarBaseListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,36 +20,58 @@ public class PseudoToJavaListener extends GrammarBaseListener {
         }
     }
 
-    private String run = "";
-    private String declaration = "";
+    private StringBuilder run = new StringBuilder("");
+    private StringBuilder declaration = new StringBuilder("");
 
     @Override
     public void enterFun(GrammarParser.FunContext ctx) {
+
+        StringBuilder args = new StringBuilder("");
+        StringBuilder args2 = new StringBuilder("");
+
         String functionName = ctx.PHRASE().getText();
-        StringBuilder args = new StringBuilder();
-        StringBuilder args2 = new StringBuilder();
-        if (ctx.args() != null) {
 
-            for (int i = 0; i < ctx.getChildCount(); i++) {
-                for (int j = 0; j < ctx.getChild(i).getChildCount(); j++) {
-                    if (!Objects.equals(ctx.getChild(i).getChild(j).getText(), ",")) {
-                        args.append("int ").append(ctx.getChild(i).getChild(j).getText());
-                        args2.append(ctx.getChild(i).getChild(j).getText());
-                    } else {
-                        args.append(", ");
-                        args2.append(", ");
-                    }
-                }
-            }
+//        System.out.println(ctx.getText());
+//        ParseTree parent = ctx.getParent();
+//        while (parent != null && !(parent instanceof GrammarParser.FunContext)) {
+//            parent = parent.getParent();
+//        }
+//        if (parent instanceof GrammarParser.FunContext) {
+//            System.out.println("The closest parent is a fun.");
+//        } else {
+//            System.out.println("The closest parent is not a fun.");
+//        }
+
+        ParseTree parent = ctx.getParent();
+        while (parent != null && !(parent instanceof GrammarParser.FunContext)) {
+            parent = parent.getParent();
         }
-        run += functionName + "(" + args2 + ");\n";
-        declaration += "public void " + functionName + "(" + args + "){\n}\n";
 
-//        System.out.println(functionName + "(" + args2 + ");\n" +  "public void " + functionName + "(" + args + "){\n}");
+        run.append(functionName).append("(");
+
+        if (parent != null) {
+            declaration.append(functionName).append("(");
+        } else {
+            declaration.append("public void ").append(functionName).append("(");
+        }
     }
 
     @Override
     public void exitFun(GrammarParser.FunContext ctx) {
+
+//        System.out.println(ctx.getText());
+        ParseTree parent = ctx.getParent();
+        while (parent != null && !(parent instanceof GrammarParser.FunContext)) {
+            parent = parent.getParent();
+        }
+
+        if (parent != null) {
+            run.append(")");
+            declaration.append(")");
+        } else {
+            run.append(");\n");
+            declaration.append("){\n}\n");
+        }
     }
 
 //    @Override
@@ -62,7 +85,25 @@ public class PseudoToJavaListener extends GrammarBaseListener {
 
     @Override
     public void enterArgs(GrammarParser.ArgsContext ctx) {
-//        System.out.println(ctx.args());
-//        System.out.println(ctx.PHRASE());
+
+        ParseTree parent = ctx.getParent();
+        while (parent != null && !(parent instanceof GrammarParser.FunContext)) {
+            parent = parent.getParent();
+        }
+
+        if (ctx.fun() == null) {
+            if (!ctx.getText().contains(",")) {
+                run.append(ctx.getText());
+                declaration.append(("int ")).append(ctx.getText());
+            } else {
+                run.append(", ");
+                declaration.append(", ");
+            }
+        }
+    }
+
+    @Override
+    public void exitArgs(GrammarParser.ArgsContext ctx) {
+
     }
 }

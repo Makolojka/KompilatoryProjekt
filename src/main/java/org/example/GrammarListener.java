@@ -18,15 +18,15 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitSeq(GrammarParser.SeqContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#seq2}.
+	 * Enter a parse tree produced by {@link GrammarParser#arg}.
 	 * @param ctx the parse tree
 	 */
-	void enterSeq2(GrammarParser.Seq2Context ctx);
+	void enterArg(GrammarParser.ArgContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#seq2}.
+	 * Exit a parse tree produced by {@link GrammarParser#arg}.
 	 * @param ctx the parse tree
 	 */
-	void exitSeq2(GrammarParser.Seq2Context ctx);
+	void exitArg(GrammarParser.ArgContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#fun}.
 	 * @param ctx the parse tree
