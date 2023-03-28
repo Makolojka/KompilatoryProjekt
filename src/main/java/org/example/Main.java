@@ -37,9 +37,10 @@ public class Main {
 //        // output the translated Python code
 //        System.out.println(pythonCode);
 
-        String input = "seq(fun1(x),seq(seq(fun2(x),fun3(y,z)),fun4(y,z)))";
+        String input = "seq(seq(seq(fun1(a,b,c),seq(fun2(z,y),fun3(g1,a1))),fun4(t2,a2)),fun5(y5,u4))";
         GrammarLexer lexer = new GrammarLexer(CharStreams.fromString(input));
         GrammarParser parser = new GrammarParser(new CommonTokenStream(lexer));
+        parser.addErrorListener(new ThrowingErrorListener());
         GrammarParser.SeqContext seqContext = parser.seq();
         GrammarListener listener = new PseudoToJavaListener();
         ParseTreeWalker walker = new ParseTreeWalker();
