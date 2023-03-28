@@ -19,10 +19,10 @@ public class GrammarParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, WS=5, PHRASE=6;
 	public static final int
-		RULE_seq = 0, RULE_fun = 1, RULE_args = 2;
+		RULE_seq = 0, RULE_seq2 = 1, RULE_fun = 2, RULE_args = 3;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"seq", "fun", "args"
+			"seq", "seq2", "fun", "args"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -91,11 +91,11 @@ public class GrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class SeqContext extends ParserRuleContext {
-		public List<FunContext> fun() {
-			return getRuleContexts(FunContext.class);
+		public List<Seq2Context> seq2() {
+			return getRuleContexts(Seq2Context.class);
 		}
-		public FunContext fun(int i) {
-			return getRuleContext(FunContext.class,i);
+		public Seq2Context seq2(int i) {
+			return getRuleContext(Seq2Context.class,i);
 		}
 		public SeqContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -122,16 +122,79 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(6);
-			match(T__0);
-			setState(7);
-			fun();
 			setState(8);
-			match(T__1);
+			match(T__0);
 			setState(9);
-			fun();
+			seq2();
 			setState(10);
+			match(T__1);
+			setState(11);
+			seq2();
+			setState(12);
 			match(T__2);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Seq2Context extends ParserRuleContext {
+		public FunContext fun() {
+			return getRuleContext(FunContext.class,0);
+		}
+		public SeqContext seq() {
+			return getRuleContext(SeqContext.class,0);
+		}
+		public Seq2Context(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_seq2; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterSeq2(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitSeq2(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GrammarVisitor ) return ((GrammarVisitor<? extends T>)visitor).visitSeq2(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Seq2Context seq2() throws RecognitionException {
+		Seq2Context _localctx = new Seq2Context(_ctx, getState());
+		enterRule(_localctx, 2, RULE_seq2);
+		try {
+			setState(16);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case PHRASE:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(14);
+				fun();
+				}
+				break;
+			case T__0:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(15);
+				seq();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -175,30 +238,30 @@ public class GrammarParser extends Parser {
 
 	public final FunContext fun() throws RecognitionException {
 		FunContext _localctx = new FunContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_fun);
+		enterRule(_localctx, 4, RULE_fun);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(12);
+			setState(18);
 			match(PHRASE);
-			setState(13);
+			setState(19);
 			match(T__3);
-			setState(17);
+			setState(23);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T__1 || _la==PHRASE) {
 				{
 				{
-				setState(14);
+				setState(20);
 				args();
 				}
 				}
-				setState(19);
+				setState(25);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(20);
+			setState(26);
 			match(T__2);
 			}
 		}
@@ -240,24 +303,24 @@ public class GrammarParser extends Parser {
 
 	public final ArgsContext args() throws RecognitionException {
 		ArgsContext _localctx = new ArgsContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_args);
+		enterRule(_localctx, 6, RULE_args);
 		try {
-			setState(25);
+			setState(31);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case PHRASE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(22);
+				setState(28);
 				match(PHRASE);
 				}
 				break;
 			case T__1:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(23);
+				setState(29);
 				match(T__1);
-				setState(24);
+				setState(30);
 				args();
 				}
 				break;
@@ -277,25 +340,29 @@ public class GrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0006\u001c\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
-		"\u0002\u0002\u0007\u0002\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000"+
-		"\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0005\u0001"+
-		"\u0010\b\u0001\n\u0001\f\u0001\u0013\t\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0002\u0001\u0002\u0001\u0002\u0003\u0002\u001a\b\u0002\u0001\u0002\u0000"+
-		"\u0000\u0003\u0000\u0002\u0004\u0000\u0000\u001a\u0000\u0006\u0001\u0000"+
-		"\u0000\u0000\u0002\f\u0001\u0000\u0000\u0000\u0004\u0019\u0001\u0000\u0000"+
-		"\u0000\u0006\u0007\u0005\u0001\u0000\u0000\u0007\b\u0003\u0002\u0001\u0000"+
-		"\b\t\u0005\u0002\u0000\u0000\t\n\u0003\u0002\u0001\u0000\n\u000b\u0005"+
-		"\u0003\u0000\u0000\u000b\u0001\u0001\u0000\u0000\u0000\f\r\u0005\u0006"+
-		"\u0000\u0000\r\u0011\u0005\u0004\u0000\u0000\u000e\u0010\u0003\u0004\u0002"+
-		"\u0000\u000f\u000e\u0001\u0000\u0000\u0000\u0010\u0013\u0001\u0000\u0000"+
-		"\u0000\u0011\u000f\u0001\u0000\u0000\u0000\u0011\u0012\u0001\u0000\u0000"+
-		"\u0000\u0012\u0014\u0001\u0000\u0000\u0000\u0013\u0011\u0001\u0000\u0000"+
-		"\u0000\u0014\u0015\u0005\u0003\u0000\u0000\u0015\u0003\u0001\u0000\u0000"+
-		"\u0000\u0016\u001a\u0005\u0006\u0000\u0000\u0017\u0018\u0005\u0002\u0000"+
-		"\u0000\u0018\u001a\u0003\u0004\u0002\u0000\u0019\u0016\u0001\u0000\u0000"+
-		"\u0000\u0019\u0017\u0001\u0000\u0000\u0000\u001a\u0005\u0001\u0000\u0000"+
-		"\u0000\u0002\u0011\u0019";
+		"\u0004\u0001\u0006\"\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0001\u0000\u0001\u0000\u0001"+
+		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0003"+
+		"\u0001\u0011\b\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0005\u0002\u0016"+
+		"\b\u0002\n\u0002\f\u0002\u0019\t\u0002\u0001\u0002\u0001\u0002\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0003\u0003 \b\u0003\u0001\u0003\u0000\u0000"+
+		"\u0004\u0000\u0002\u0004\u0006\u0000\u0000 \u0000\b\u0001\u0000\u0000"+
+		"\u0000\u0002\u0010\u0001\u0000\u0000\u0000\u0004\u0012\u0001\u0000\u0000"+
+		"\u0000\u0006\u001f\u0001\u0000\u0000\u0000\b\t\u0005\u0001\u0000\u0000"+
+		"\t\n\u0003\u0002\u0001\u0000\n\u000b\u0005\u0002\u0000\u0000\u000b\f\u0003"+
+		"\u0002\u0001\u0000\f\r\u0005\u0003\u0000\u0000\r\u0001\u0001\u0000\u0000"+
+		"\u0000\u000e\u0011\u0003\u0004\u0002\u0000\u000f\u0011\u0003\u0000\u0000"+
+		"\u0000\u0010\u000e\u0001\u0000\u0000\u0000\u0010\u000f\u0001\u0000\u0000"+
+		"\u0000\u0011\u0003\u0001\u0000\u0000\u0000\u0012\u0013\u0005\u0006\u0000"+
+		"\u0000\u0013\u0017\u0005\u0004\u0000\u0000\u0014\u0016\u0003\u0006\u0003"+
+		"\u0000\u0015\u0014\u0001\u0000\u0000\u0000\u0016\u0019\u0001\u0000\u0000"+
+		"\u0000\u0017\u0015\u0001\u0000\u0000\u0000\u0017\u0018\u0001\u0000\u0000"+
+		"\u0000\u0018\u001a\u0001\u0000\u0000\u0000\u0019\u0017\u0001\u0000\u0000"+
+		"\u0000\u001a\u001b\u0005\u0003\u0000\u0000\u001b\u0005\u0001\u0000\u0000"+
+		"\u0000\u001c \u0005\u0006\u0000\u0000\u001d\u001e\u0005\u0002\u0000\u0000"+
+		"\u001e \u0003\u0006\u0003\u0000\u001f\u001c\u0001\u0000\u0000\u0000\u001f"+
+		"\u001d\u0001\u0000\u0000\u0000 \u0007\u0001\u0000\u0000\u0000\u0003\u0010"+
+		"\u0017\u001f";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

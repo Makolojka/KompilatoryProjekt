@@ -17,6 +17,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSeq(GrammarParser.SeqContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GrammarParser#seq2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSeq2(GrammarParser.Seq2Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link GrammarParser#fun}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
